@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gwf.vul.dao.UserDAO">
+    <resultMap id="userResultMap" type="com.gwf.vul.entity.User">
+        <id column="user_id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+
+        <!--配置角色集合的映射-->
+        <!-- property java属性名-->
+        <collection property="roles" ofType="com.gwf.vul.entity.Role">
+            <id column="role_id" property="id"/>
+            <result column="name" property="roleName"/>
+            <result column="description" property="roleDescription"/>
+        </collection>
+
+    </resultMap>
+    <insert id="add" parameterType="com.gwf.vul.entity.User">
+        insert into `user` (username, password)
+        values (#{username}, #{password})
+    </insert>
+
+    <update id="update" parameterType="com.gwf.vul.entity.User">
+        update `user`
+        set password=#{password}
+        where username = #{username}
+    </update>
+
+    <select id="getById" resultMap="userResultMap" parameterType="java.lang.Integer">
+        select *
+        from `user`
+        where id = #{id}
+    </select>
+
+    <select id="getByUsername" resultMap="userResultMap" parameterType="java.lang.String">
+        select *
+        from `user`
+        where username = #{username}
+    </select>
+    <select id="getAllUser" resultMap="userResultMap">
+        select *
+        from `user`
+    </select>
+    <!-- 配置查询所有操作，查询结果封装在User类里 -->
+    <select id="getAllUserRole" resultMap="userResultMap">
+        SELECT u.*, r.role_id, r.name, r.description
+        FROM user u
+                 LEFT OUTER JOIN user_role ur ON u.user_id = ur.user_id
+                 LEFT OUTER JOIN role r ON r.role_id = ur.role_id
+    </select>
+    <delete id="delUserByUsername" parameterType="java.lang.String">
+        delete
+        from `user`
+        where username = #{username}
+    </delete>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gwf.vul.dao.RoleDAO">
+    <resultMap id="roleResultMap" type="com.gwf.vul.entity.Role">
+        <id column="role_id" property="id"/>
+        <result column="name" property="roleName"/>
+        <result column="description" property="roleDescription"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.gwf.vul.entity.Role">
+        insert into `role` (name, description)
+        values (#{roleName}, #{roleDescription})
+    </insert>
+
+    <select id="getByRoleName" resultMap="roleResultMap" parameterType="java.lang.String">
+        select *
+        from `role`
+        where name = #{roleName}
+    </select>
+    <select id="getAllRole" resultMap="roleResultMap">
+        select *
+        from `role`
+    </select>
+
+
+</mapper>
