@@ -24,7 +24,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.108.129:3307/gaoweifeng?serverTimezone=UTC&useSSL=false
     username: root
-    password: 123456
+    password: ENC(sdQCuiTYW35A/roIEfcW7/VtgxjSeSOn/Pb6kbIvdx/Sw+e0OErUsXW5cIFeJorw)
 
 # springdoc-openapi项目配置
 springdoc:
@@ -38,27 +38,13 @@ springdoc:
     - group: 'default'
       paths-to-match: '/**'
       packages-to-scan: com.gwf.vul.api
-#  application:
-#    #服务名称
-#    name: naocs-service
-#    profiles:
-#      active: dev
-#    cloud:
-#      nacos:
-#        config:
-#          # 配置文件的环境
-#          group: ${spring.profiles.active}
-#          # 配置文件的格式
-#          file-extension: yaml
-#          # 配置中心的地址
-#          server-addr: 47.105.198.54:8848
-#          # 配置文件prefix
-#          prefix: ${spring.application.name}
-#          #命名空间
-#          namespace: mall
+
 
 minio:
   endpoint: http://192.168.200.94:9000/
   accessKey: m6K3278EYLSGkGDZiYqx
   secretKey: oN8XPDF90UzqtOtaL2ZWK5jnV3MhiPtzv4JL0Pdd
   bucketName: gaoweifeng
+#jasypt:
+#  encryptor:
+#    password: e!Jd&ljyJ^e4I5oU

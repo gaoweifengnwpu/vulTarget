@@ -185,16 +185,13 @@ public class UserAPI {
     @Operation(summary = "删除用户")
     public Result<List<User>> delUser(@RequestBody User user, HttpServletRequest request) {
         Result<List<User>> result = new Result<>();
-
         Boolean isAdmin = userService.isAdmin(request);
         if (isAdmin) {
             userService.delUserByUsername(user.getUsername());
             result.setResultSuccess("成功删除用户");
-
         } else {
             result.setResultFailed("你不是管理员，，不能查看用户和角色");
         }
-
         return result;
     }
 }
